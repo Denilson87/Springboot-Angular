@@ -30,7 +30,8 @@ public class ServerServiceImplementation implements ServerService {
     }
 
     @Override
-    public Server ping(String ipAdress) {
+    public Server ping(String ipAddress) {
+        log.info("pinging server IP: {}", ipAddress);
         return null;
     }
 
