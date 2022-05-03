@@ -8,7 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Collection;
+
+import static com.app.servers.Status.SERVER_DOWN;
+import static com.app.servers.Status.SERVER_UP;
+
 @RequiredArgsConstructor
 @Transactional
 @Service
@@ -30,9 +36,13 @@ public class ServerServiceImplementation implements ServerService {
     }
 
     @Override
-    public Server ping(String ipAddress) {
+    public Server ping(String ipAddress) throws IOException {
         log.info("pinging server IP: {}", ipAddress);
-        return null;
+        Server server = serverRepository.findByIpAddress(ipAddress);
+        InetAddress address = InetAddress.getByName(ipAddress);
+        server.setStatus(address.isReachable(10000) ? SERVER_UP : SERVER_DOWN);
+        serverRepository.save(server);
+        return server;
     }
 
     @Override
