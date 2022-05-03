@@ -17,6 +17,7 @@ import static com.app.servers.Status.SERVER_DOWN;
 import static com.app.servers.Status.SERVER_UP;
 import static java.util.List.of;
 import static java.util.stream.Collectors.toList;
+import static org.springframework.data.domain.PageRequest.of;
 
 @RequiredArgsConstructor
 @Transactional
@@ -36,7 +37,7 @@ public class ServerServiceImplementation implements ServerService {
     @Override
     public Collection<Server> list(int limit) {
         log.info("Fetching all servers");
-        return serverRepository.findAll(PageRequest.of(0, limit)).toList();
+        return serverRepository.findAll(of(0, limit)).toList();
     }
 
     @Override
