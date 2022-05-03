@@ -18,6 +18,11 @@ public class ServerServiceImplementation implements ServerService {
     }
 
     @Override
+    public Server ping(String ipAdress) {
+        return null;
+    }
+
+    @Override
     public Server get(Long id) {
         return null;
     }
