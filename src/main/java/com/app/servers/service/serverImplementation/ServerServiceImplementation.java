@@ -5,6 +5,7 @@ import com.app.servers.repositories.ServerRepository;
 import com.app.servers.service.ServerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,6 +15,8 @@ import java.util.Collection;
 
 import static com.app.servers.Status.SERVER_DOWN;
 import static com.app.servers.Status.SERVER_UP;
+import static java.util.List.of;
+import static java.util.stream.Collectors.toList;
 
 @RequiredArgsConstructor
 @Transactional
@@ -32,7 +35,8 @@ public class ServerServiceImplementation implements ServerService {
 
     @Override
     public Collection<Server> list(int limit) {
-        return null;
+        log.info("Fetching all servers");
+        return serverRepository.findAll(PageRequest.of(0, limit)).toList();
     }
 
     @Override
