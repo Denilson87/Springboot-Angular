@@ -5,6 +5,7 @@ import com.app.servers.service.serverImplementation.ServerServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +29,18 @@ public class ServerController {
                 Response.builder()
                         .timeStamp(now())
                         .data(of("servers",serverService.list(30)))
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+
+    @GetMapping("/ping{ipAddress}")
+    public ResponseEntity<Response> pingServer(@PathVariable("ipAddress")String ipAddress){
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("servers",serverService.ping(30)))
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
