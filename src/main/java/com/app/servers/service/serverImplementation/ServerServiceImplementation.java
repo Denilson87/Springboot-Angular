@@ -15,6 +15,7 @@ import java.util.Collection;
 
 import static com.app.servers.Status.SERVER_DOWN;
 import static com.app.servers.Status.SERVER_UP;
+import static java.lang.Boolean.*;
 import static java.util.List.of;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.data.domain.PageRequest.of;
@@ -52,20 +53,25 @@ public class ServerServiceImplementation implements ServerService {
 
     @Override
     public Server get(Long id) {
-        return null;
+        log.info("Getting server by id : {}", id);
+        return serverRepository.findById(id).get();
     }
 
     @Override
     public Server update(Server server) {
-        return null;
+        log.info("updating server", server.getName());
+        return serverRepository.save(server);
     }
 
     @Override
     public Boolean delete(Long id) {
-        return null;
+        log.info("deleting server by id : {}", id);
+        serverRepository.deleteById(id);
+        return TRUE;
     }
 
     private String setServerImageUrl() {
+        String[] imageNames={"server1.png","server2.png","server3.png","server4.png"};
         return null;
     }
 }
