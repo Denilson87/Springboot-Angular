@@ -6,11 +6,14 @@ import com.app.servers.model.Server;
 import com.app.servers.service.ServerService;
 import com.app.servers.service.serverImplementation.ServerServiceImplementation;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.jni.File;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -19,6 +22,8 @@ import static java.time.LocalDateTime.now;
 import static java.util.Map.*;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.MediaType.IMAGE_PNG;
+import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 
 @RestController
 @RequiredArgsConstructor
@@ -92,8 +97,8 @@ public class ServerController {
         );
     }
 
-    @GetMapping("/image/{fileName}")
+    @GetMapping(path = "/image/{fileName}" produces = IMAGE_PNG_VALUE)
     public byte[] getServerImage(@PathVariable("fileName") String fileName) {
-        return fileName;
+        return Files.readAllBytes(Paths.get(System.getProperty("user.home") + "Downloads/images/"+fileName));
     }
 }
