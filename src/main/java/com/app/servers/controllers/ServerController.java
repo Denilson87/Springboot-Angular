@@ -67,7 +67,7 @@ public class ServerController {
     }
 
     @GetMapping("/get{id}")
-    public ResponseEntity<Response> getServer(@PathVariable("id")Long id) throws IOException {
+    public ResponseEntity<Response> getServer(@PathVariable("id")Long id) {
         Server server = serverService.get(id);
         return ResponseEntity.ok(
                 Response.builder()
