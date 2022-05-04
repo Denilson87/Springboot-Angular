@@ -67,13 +67,13 @@ public class ServerController {
     }
 
     @GetMapping("/get{id}")
-    public ResponseEntity<Response> getServer(@PathVariable("id")Long id) {
+    public ResponseEntity<Response> getServer(@PathVariable("id") Long id) {
         Server server = serverService.get(id);
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("server",server))
-                        .message(server.getStatus() == SERVER_UP ? "Server is up" : "Ping failure")
+                        .data(of("server",serverService.get(id)))
+                        .message("Server retrived")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
