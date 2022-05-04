@@ -58,10 +58,24 @@ public class ServerController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("server",server))
-                        .message(server.)
+                        .data(of("server",serverService.create(server)))
+                        .message("server created! ")
                         .status(CREATED)
                         .statusCode(CREATED.value())
+                        .build()
+        );
+    }
+
+    @GetMapping("/get{id}")
+    public ResponseEntity<Response> getServer(@PathVariable("id")Long id) throws IOException {
+        Server server = serverService.get(id);
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("server",server))
+                        .message(server.getStatus() == SERVER_UP ? "Server is up" : "Ping failure")
+                        .status(OK)
+                        .statusCode(OK.value())
                         .build()
         );
     }
