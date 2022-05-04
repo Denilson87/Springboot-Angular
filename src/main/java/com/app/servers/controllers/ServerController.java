@@ -98,7 +98,7 @@ public class ServerController {
     }
 
     @GetMapping(path = "/image/{fileName}" produces = IMAGE_PNG_VALUE)
-    public byte[] getServerImage(@PathVariable("fileName") String fileName) {
-        return Files.readAllBytes(Paths.get(System.getProperty("user.home") + "Downloads/images/"+fileName));
+    public byte[] getServerImage(@PathVariable("fileName") String fileName) throws IOException {
+        return Files.readAllBytes(Paths.get(System.getProperty("user.home") + "Downloads/images/" + fileName));
     }
 }
