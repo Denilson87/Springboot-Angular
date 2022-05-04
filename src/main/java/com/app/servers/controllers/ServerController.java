@@ -68,11 +68,23 @@ public class ServerController {
 
     @GetMapping("/get{id}")
     public ResponseEntity<Response> getServer(@PathVariable("id") Long id) {
-        Server server = serverService.get(id);
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
                         .data(of("server",serverService.get(id)))
+                        .message("Server retrived")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+
+    @DeleteMapping("/delete{id}")
+    public ResponseEntity<Response> deleteServer(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("server",serverService.delete(id)))
                         .message("Server retrived")
                         .status(OK)
                         .statusCode(OK.value())
