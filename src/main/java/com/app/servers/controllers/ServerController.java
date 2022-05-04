@@ -91,4 +91,9 @@ public class ServerController {
                         .build()
         );
     }
+
+    @GetMapping("/image/{fileName}")
+    public byte[] getServerImage(@PathVariable("fileName") String fileName) {
+        return fileName;
+    }
 }
