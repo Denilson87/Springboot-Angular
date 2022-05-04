@@ -17,6 +17,7 @@ import java.util.Map;
 import static com.app.servers.Status.SERVER_UP;
 import static java.time.LocalDateTime.now;
 import static java.util.Map.*;
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -59,8 +60,8 @@ public class ServerController {
                         .timeStamp(now())
                         .data(of("server",server))
                         .message(server.)
-                        .status(OK)
-                        .statusCode(OK.value())
+                        .status(CREATED)
+                        .statusCode(CREATED.value())
                         .build()
         );
     }
